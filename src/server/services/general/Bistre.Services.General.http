@@ -1,0 +1,6 @@
+@Bistre.Services.General_HostAddress = http://localhost:5072
+
+GET {{Bistre.Services.General_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
