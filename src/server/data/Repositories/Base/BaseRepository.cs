@@ -2,7 +2,7 @@
 using Bistre.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bistre.Data.Repositories;
+namespace Bistre.Data.Repositories.Base;
 
 public class BaseRepository<TEntity>(DbContext context) : IBaseRepository<TEntity>
 where TEntity : BaseEntity
@@ -10,8 +10,6 @@ where TEntity : BaseEntity
     private readonly DbContext _context = context;
 
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
-
-    // Create
 
     /// <summary>
     /// Insertion of a Single Entity.
@@ -82,8 +80,6 @@ where TEntity : BaseEntity
         }
     }
 
-    // Read
-
     /// <summary>
     /// Retrieves a Single Item.
     /// </summary>
@@ -135,8 +131,6 @@ where TEntity : BaseEntity
             return null;
         }
     }
-
-    // Update
 
     /// <summary>
     /// Updates a single entry.
@@ -207,8 +201,6 @@ where TEntity : BaseEntity
             await _transaction.RollbackAsync();
         }
     }
-
-    // Delete
 
     /// <summary>
     /// Marks a single item as deleted, to prevent user access and/or mutation.
