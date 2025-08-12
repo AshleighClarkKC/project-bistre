@@ -18,5 +18,5 @@ public class BaseModel
 
     public Guid? DeletedBy { get; set; }
 
-    public DateTime? DeletedDate { get; set; }
+    public DateTime? DeletedDate { get; set; } 
 }

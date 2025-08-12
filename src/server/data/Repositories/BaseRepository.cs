@@ -1,5 +1,5 @@
 ﻿using Bistre.Data.Contracts.Base;
-using Bistre.Data.Entities.Base;
+using Bistre.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bistre.Data.Repositories;
