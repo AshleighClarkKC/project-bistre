@@ -1,4 +1,7 @@
 ﻿using Bistre.Data.Contexts;
+using Bistre.Data.Contracts.Base;
+using Bistre.Data.Repositories;
+using Bistre.Entities;
 using Bistre.Models.Commands;
 using Bistre.Models.Queries;
 using LiteBus.Commands.Extensions.MicrosoftDependencyInjection;
@@ -13,7 +16,9 @@ public static class PersistenceExtensions
 {
     public static IServiceCollection AddDefaultDataContext(this IServiceCollection svc, Action<DbContextOptionsBuilder>? options = null) 
         => svc.AddDbContext<DefaultContext>(options);
-    
+
+    public static IServiceCollection AddLookupRepository(this IServiceCollection svc)
+        => svc.AddScoped<IBaseRepository<LookupEntity>, LookupRepository>();
 
     public static IServiceCollection AddLookupMediator(this IServiceCollection svc) 
         => svc.AddLiteBus(

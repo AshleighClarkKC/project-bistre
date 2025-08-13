@@ -19,9 +19,10 @@ builder.Services
             o.UseSqlServer(
                 connectionString: builder.Configuration.GetConnectionString("Default")
             );
-        } 
+        }
     )
-    .AddLookupMediator();
+    .AddLookupMediator()
+    .AddLookupRepository();
 
 // Building the WebApplication
 
