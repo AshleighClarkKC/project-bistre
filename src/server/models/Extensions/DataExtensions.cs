@@ -1,5 +1,6 @@
 ﻿using Bistre.Entities.Base;
 using Bistre.Models.Base;
+using System.Reflection;
 
 namespace Bistre.Models.Extensions;
 
@@ -10,20 +11,70 @@ public static class DataExtensions
     /// </summary>
     /// <typeparam name="TEntity">The type parameter to assert against an Entity type.</typeparam>
     /// <param name="model">The instance of data, to be converted to an Entity.</param>
-    /// <param name="mappingExpression">The conversion expression to facilitate the conversion.</param>
     /// <returns>Returns a hydrated Entity instance.</returns>
-    public static TEntity MapToEntity<TEntity>(this BaseModel model, Func<BaseModel, TEntity> mappingExpression) 
+    public static TEntity ToEntity<TModel, TEntity>(this TModel model)
+    where TModel : BaseModel
     where TEntity : BaseEntity
-        => mappingExpression(model);
+    {
+        TEntity instance = Activator.CreateInstance<TEntity>();
+
+        var sourceProps = typeof(TModel)
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        var targetProps = typeof(TEntity)
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .ToDictionary(d => d.Name);
+
+        foreach (var sp in sourceProps)
+        {
+            if (!targetProps.TryGetValue(sp.Name, out var tp)) 
+            { continue; }
+
+            if (!tp.CanWrite || !sp.CanRead) 
+            { continue; }
+
+            if (tp.PropertyType.IsAssignableFrom(sp.PropertyType))
+            {
+                var value = sp.GetValue(model);
+                tp.SetValue(instance, value);
+            }
+        }
+
+        return instance;
+    }
 
     /// <summary>
     /// Assists with conversion from types derived from a <see cref="BaseEntity"/> to a model derived from <see cref="BaseModel"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type parameter to assert against an Entity type.</typeparam>
     /// <param name="entity">The Entity instance to convert to a model.</param>
-    /// <param name="mappingExpression">The conversion expression to facilitate the conversion.</param>
     /// <returns>Returns a hydrated model instance.</returns>
-    public static BaseModel MapToModel<TEntity>(this TEntity entity, Func<TEntity, BaseModel> mappingExpression) 
+    public static TModel ToModel<TEntity, TModel>(this TEntity entity) 
     where TEntity : BaseEntity
-        => mappingExpression(entity);
+    where TModel : BaseModel
+    {
+        TModel instance = Activator.CreateInstance<TModel>();
+
+        var sourceProps = typeof(TModel)
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        var targetProps = typeof(TEntity)
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .ToDictionary(d => d.Name);
+
+        foreach (var sp in sourceProps)
+        {
+            if (!targetProps.TryGetValue(sp.Name, out var tp))
+            { continue; }
+
+            if (!tp.CanWrite || !sp.CanRead)
+            { continue; }
+
+            if (tp.PropertyType.IsAssignableFrom(sp.PropertyType))
+            {
+                var value = sp.GetValue(entity);
+                tp.SetValue(instance, value);
+            }
+        }
+
+        return instance;
+    }
 }
