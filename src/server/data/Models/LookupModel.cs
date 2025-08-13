@@ -1,6 +1,6 @@
-﻿using Bistre.Models.Base;
+﻿using Bistre.Data.Models.Base;
 
-namespace Bistre.Models;
+namespace Bistre.Data.Models;
 
 public class LookupModel : BaseModel
 {

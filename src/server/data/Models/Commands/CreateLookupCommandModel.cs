@@ -1,10 +1,10 @@
-﻿using Bistre.Models.Base;
-using Bistre.Models.Results.Base;
+﻿using Bistre.Data.Models.Base;
+using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 
-namespace Bistre.Models.Commands;
+namespace Bistre.Data.Models.Commands;
 
-public class UpdateLookupCommandModel : BaseModel, ICommand<BaseCommandResult>
+public class CreateLookupCommandModel : BaseModel, ICommand<BaseCommandResult>
 {
     public int? LookupTypeId { get; set; }
 
@@ -12,3 +12,4 @@ public class UpdateLookupCommandModel : BaseModel, ICommand<BaseCommandResult>
 
     public string Description { get; set; } = string.Empty;
 }
+

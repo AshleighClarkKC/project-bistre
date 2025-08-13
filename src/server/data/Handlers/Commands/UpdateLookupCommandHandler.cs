@@ -1,16 +1,17 @@
 ﻿using Bistre.Data.Repositories;
 using Bistre.Entities;
-using Bistre.Models.Commands;
-using Bistre.Models.Extensions;
-using Bistre.Models.Results.Base;
+using Bistre.Data.Models.Commands;
+using Bistre.Data.Extensions;
+using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
+using Bistre.Data.Contracts.Base;
 
 namespace Bistre.Data.Handlers.Commands;
 
-public class UpdateLookupCommandHandler(LookupRepository repository) : ICommandHandler<UpdateLookupCommandModel, BaseCommandResult>
+public class UpdateLookupCommandHandler(IBaseRepository<LookupEntity> repository) : ICommandHandler<UpdateLookupCommandModel, BaseCommandResult>
 {
-    private readonly LookupRepository _repository = repository;
+    private readonly IBaseRepository<LookupEntity> _repository = repository;
 
     public async Task<BaseCommandResult> HandleAsync(UpdateLookupCommandModel message, CancellationToken cancellationToken = default)
     {

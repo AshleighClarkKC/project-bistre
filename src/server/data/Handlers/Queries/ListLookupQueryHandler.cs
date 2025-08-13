@@ -1,17 +1,18 @@
-﻿using Bistre.Data.Repositories;
+﻿using Bistre.Data.Contracts.Base;
+using Bistre.Data.Extensions;
+using Bistre.Data.Models;
+using Bistre.Data.Models.Queries;
+using Bistre.Data.Models.Results.Base;
+using Bistre.Data.Repositories;
 using Bistre.Entities;
-using Bistre.Models;
-using Bistre.Models.Extensions;
-using Bistre.Models.Queries;
-using Bistre.Models.Results.Base;
 using LiteBus.Queries.Abstractions;
 using System.Net;
 
 namespace Bistre.Data.Handlers.Queries;
 
-public class ListLookupQueryHandler(LookupRepository repository) : IQueryHandler<ListLookupQueryModel, BaseQueryResult<IReadOnlyList<LookupModel>>>
+public class ListLookupQueryHandler(IBaseRepository<LookupEntity> repository) : IQueryHandler<ListLookupQueryModel, BaseQueryResult<IReadOnlyList<LookupModel>>>
 {
-    private readonly LookupRepository _repository = repository;
+    private readonly IBaseRepository<LookupEntity> _repository = repository;
 
     public async Task<BaseQueryResult<IReadOnlyList<LookupModel>>> HandleAsync(ListLookupQueryModel message, CancellationToken cancellationToken = default)
     {

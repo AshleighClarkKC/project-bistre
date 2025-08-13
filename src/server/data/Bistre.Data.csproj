@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\models\Bistre.Models.csproj" />
     <ProjectReference Include="..\entities\Bistre.Entities.csproj" />
   </ItemGroup>
 

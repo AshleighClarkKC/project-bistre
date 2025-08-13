@@ -1,14 +1,16 @@
 ﻿using Bistre.Data.Repositories;
-using Bistre.Models.Commands;
-using Bistre.Models.Results.Base;
+using Bistre.Data.Models.Commands;
+using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
+using Bistre.Data.Contracts.Base;
+using Bistre.Entities;
 
 namespace Bistre.Data.Handlers.Commands;
 
-public class DeleteLookupCommandHandler(LookupRepository repository) : ICommandHandler<DeleteLookupCommandModel, BaseCommandResult>
+public class DeleteLookupCommandHandler(IBaseRepository<LookupEntity> repository) : ICommandHandler<DeleteLookupCommandModel, BaseCommandResult>
 {
-    private readonly LookupRepository _repository = repository;
+    private readonly IBaseRepository<LookupEntity> _repository = repository;
 
     public async Task<BaseCommandResult> HandleAsync(DeleteLookupCommandModel message, CancellationToken cancellationToken = default)
     {

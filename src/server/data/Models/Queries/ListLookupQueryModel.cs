@@ -1,7 +1,7 @@
-﻿using Bistre.Models.Results.Base;
+﻿using Bistre.Data.Models.Results.Base;
 using LiteBus.Queries.Abstractions;
 
-namespace Bistre.Models.Queries;
+namespace Bistre.Data.Models.Queries;
 
 public class ListLookupQueryModel : IQuery<BaseQueryResult<IReadOnlyList<LookupModel>>>
 {

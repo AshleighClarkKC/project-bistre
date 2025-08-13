@@ -1,4 +1,4 @@
-﻿namespace Bistre.Models.Results.Base;
+﻿namespace Bistre.Data.Models.Results.Base;
 
 public class BaseCommandContentResult<TResultContent>
 {

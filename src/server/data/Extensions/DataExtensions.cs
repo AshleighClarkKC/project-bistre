@@ -1,8 +1,8 @@
 ﻿using Bistre.Entities.Base;
-using Bistre.Models.Base;
+using Bistre.Data.Models.Base;
 using System.Reflection;
 
-namespace Bistre.Models.Extensions;
+namespace Bistre.Data.Extensions;
 
 public static class DataExtensions
 {

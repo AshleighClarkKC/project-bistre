@@ -1,6 +1,6 @@
-﻿namespace Bistre.Models.Results.Base;
+﻿namespace Bistre.Data.Models.Results.Base;
 
-public class BaseCommandResult
+public class BaseQueryResult<TResultContent>
 {
     public bool Success { get; set; }
 
@@ -8,4 +8,5 @@ public class BaseCommandResult
 
     public string Message { get; set; } = string.Empty;
 
+    public TResultContent? Data { get; set; }
 }

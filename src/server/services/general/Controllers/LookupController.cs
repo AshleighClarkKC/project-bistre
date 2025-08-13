@@ -1,7 +1,7 @@
-﻿using Bistre.Models;
-using Bistre.Models.Commands;
-using Bistre.Models.Queries;
-using Bistre.Models.Results.Base;
+﻿using Bistre.Data.Models;
+using Bistre.Data.Models.Commands;
+using Bistre.Data.Models.Queries;
+using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using LiteBus.Queries.Abstractions;
 using Microsoft.AspNetCore.Mvc;

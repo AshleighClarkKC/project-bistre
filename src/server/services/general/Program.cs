@@ -1,3 +1,4 @@
+using Bistre.Data.Contexts;
 using Bistre.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +13,9 @@ builder.Services.AddOpenApi();
 
 // Custom Data Extensions
 
+builder.Services.AddDbContext<DefaultContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
 builder.Services
-    .AddDefaultDataContext(
-        o =>
-        {
-            o.UseSqlServer(
-                connectionString: builder.Configuration.GetConnectionString("Default")
-            );
-        }
-    )
     .AddLookupMediator()
     .AddLookupRepository();
 

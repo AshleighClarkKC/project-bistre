@@ -1,4 +1,4 @@
-﻿namespace Bistre.Models.Base;
+﻿namespace Bistre.Data.Models.Base;
 
 public class BaseModel
 {
