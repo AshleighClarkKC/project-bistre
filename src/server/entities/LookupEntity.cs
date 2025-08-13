@@ -1,8 +1,8 @@
 ﻿using Bistre.Entities.Base;
 
-namespace Bistre.Data.Entities;
+namespace Bistre.Entities;
 
-public class Lookup : BaseEntity
+public class LookupEntity : BaseEntity
 {
     public int? LookupTypeId { get; set; }
 

@@ -8,7 +8,7 @@ public class BaseModel
 
     public bool IsDeleted { get; set; } = false;
 
-    public Guid CreatedBy { get; set; }
+    public Guid CreatedBy { get; set; } = Guid.Empty;
 
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 

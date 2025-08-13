@@ -50,7 +50,7 @@ where TEntity : BaseEntity
     /// <param name="models">A collection of the items to be persisted.</param>
     /// <param name="requesterId">The unique ID of the user, requesting this action.</param>
     /// <param name="onFailureAsync">A de-coupled action, to be performed when the persistence has failed.</param>
-    public virtual async Task InsertRange(IEnumerable<TEntity> models, Guid? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task InsertRangeAsync(IEnumerable<TEntity> models, Guid? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
