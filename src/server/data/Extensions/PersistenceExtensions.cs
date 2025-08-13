@@ -1,14 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bistre.Data.Contexts;
+using Bistre.Models.Commands;
+using Bistre.Models.Queries;
+using LiteBus.Commands.Extensions.MicrosoftDependencyInjection;
+using LiteBus.Messaging.Extensions.MicrosoftDependencyInjection;
+using LiteBus.Queries.Extensions.MicrosoftDependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bistre.Data.Extensions;
 
 public static class PersistenceExtensions
 {
-    public static IServiceCollection AddDataContext<TContext>(this IServiceCollection svc, Action<DbContextOptionsBuilder>? options = null) where TContext : DbContext
-    {
-        svc.AddDbContext<TContext>(options);
-        return svc;
-    }
+    public static IServiceCollection AddDefaultDataContext(this IServiceCollection svc, Action<DbContextOptionsBuilder>? options = null) 
+        => svc.AddDbContext<DefaultContext>(options);
+    
+
+    public static IServiceCollection AddLookupMediator(this IServiceCollection svc) 
+        => svc.AddLiteBus(
+            lb =>
+                lb
+                .AddCommandModule(mod => mod.RegisterFromAssembly(typeof(CreateLookupCommandModel).Assembly))
+                .AddQueryModule(mod => mod.RegisterFromAssembly(typeof(GetLookupQueryModel).Assembly))
+        );
 }
 

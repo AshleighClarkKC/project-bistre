@@ -1,37 +1,35 @@
 ﻿using Bistre.Data.Repositories;
-using Bistre.Entities;
 using Bistre.Models.Commands;
-using Bistre.Models.Extensions;
 using Bistre.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
 
 namespace Bistre.Data.Handlers.Commands;
 
-public class CreateLookupCommandHandler(LookupRepository repository) : ICommandHandler<CreateLookupCommandModel, BaseCommandResult>
+public class DeleteLookupCommandHandler(LookupRepository repository) : ICommandHandler<DeleteLookupCommandModel, BaseCommandResult>
 {
     private readonly LookupRepository _repository = repository;
 
-    public async Task<BaseCommandResult> HandleAsync(CreateLookupCommandModel message, CancellationToken cancellationToken = default)
+    public async Task<BaseCommandResult> HandleAsync(DeleteLookupCommandModel message, CancellationToken cancellationToken = default)
     {
         BaseCommandResult result = new ();
 
         try
         {
-            var entity = message.ToEntity<CreateLookupCommandModel, LookupEntity>();
-            await _repository.InsertAsync(entity, message.CreatedBy);
+            await _repository.DeleteAsync(message.Id);
 
             result.Success = true;
-            result.Status = (int)HttpStatusCode.Created;
+            result.Status = (int)HttpStatusCode.Accepted;
+
         }
         catch (Exception ex) 
         {
             result.Success = false;
             result.Status = (int)HttpStatusCode.BadRequest;
             result.Message = ex.Message;
+
         }
 
         return result;
     }
 }
-

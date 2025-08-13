@@ -8,21 +8,22 @@ using System.Net;
 
 namespace Bistre.Data.Handlers.Commands;
 
-public class CreateLookupCommandHandler(LookupRepository repository) : ICommandHandler<CreateLookupCommandModel, BaseCommandResult>
+public class UpdateLookupCommandHandler(LookupRepository repository) : ICommandHandler<UpdateLookupCommandModel, BaseCommandResult>
 {
     private readonly LookupRepository _repository = repository;
 
-    public async Task<BaseCommandResult> HandleAsync(CreateLookupCommandModel message, CancellationToken cancellationToken = default)
+    public async Task<BaseCommandResult> HandleAsync(UpdateLookupCommandModel message, CancellationToken cancellationToken = default)
     {
         BaseCommandResult result = new ();
 
         try
         {
-            var entity = message.ToEntity<CreateLookupCommandModel, LookupEntity>();
-            await _repository.InsertAsync(entity, message.CreatedBy);
+            var entity = message.ToEntity<UpdateLookupCommandModel, LookupEntity>();
+            await _repository.UpdateAsync(entity, message.CreatedBy);
 
             result.Success = true;
-            result.Status = (int)HttpStatusCode.Created;
+            result.Status = (int)HttpStatusCode.Accepted;
+
         }
         catch (Exception ex) 
         {
@@ -34,4 +35,3 @@ public class CreateLookupCommandHandler(LookupRepository repository) : ICommandH
         return result;
     }
 }
-

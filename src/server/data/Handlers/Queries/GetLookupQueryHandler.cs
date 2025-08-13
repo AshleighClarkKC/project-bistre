@@ -24,7 +24,7 @@ public class GetLookupQueryHandler(LookupRepository repository) : IQueryHandler<
             result.Success = data != null;
             result.Status = data != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.NotFound;
 
-            result.Data = data?.ToModel<LookupEntity, LookupModel>();
+            result.Data = data?.ToModel<LookupEntity, LookupModel>() ?? null;
         }
         catch (Exception ex) 
         {
