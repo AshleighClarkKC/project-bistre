@@ -1,6 +1,6 @@
-﻿using Bistre.Entities.Base;
+﻿using Bistre.Data.Entities.Base;
 
-namespace Bistre.Entities;
+namespace Bistre.Data.Entities;
 
 public class LookupEntity : BaseEntity
 {

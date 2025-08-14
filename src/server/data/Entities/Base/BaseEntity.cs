@@ -1,9 +1,9 @@
-﻿using Bistre.Data.Entities.Base;
+﻿using Bistre.Data.Models.Base;
 using System.Reflection;
 
-namespace Bistre.Data.Models.Base;
+namespace Bistre.Data.Entities.Base;
 
-public class BaseModel
+public class BaseEntity
 {
     public int Id { get; set; }
 
@@ -24,19 +24,19 @@ public class BaseModel
     public DateTime? DeletedDate { get; set; }
 
     /// <summary>
-    /// Assists with conversion from the <see cref="BaseModel"/> to a <see cref="BaseEntity"/> to streamline persistence.
+    /// Assists with conversion from types derived from a <see cref="BaseEntity"/> to a model derived from <see cref="BaseModel"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type parameter to assert against an Entity type.</typeparam>
-    /// <returns>Returns a hydrated Entity instance.</returns>
-    internal TEntity ToEntity<TEntity>() where TEntity : BaseEntity
+    /// <returns>Returns a hydrated model instance.</returns>
+    internal TModel ToModel<TModel>() where TModel : BaseModel
     {
-        var modelInstance = this;
-        var entityInstance = Activator.CreateInstance<TEntity>();
+        var entityInstance = this;
+        var modelInstance = Activator.CreateInstance<TModel>();
 
-        var sourceProps = modelInstance.GetType()
+        var sourceProps = entityInstance.GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-        var targetProps = entityInstance.GetType()
+        var targetProps = modelInstance.GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .ToDictionary(d => d.Name);
 
@@ -50,11 +50,11 @@ public class BaseModel
 
             if (tp.PropertyType.IsAssignableFrom(sp.PropertyType))
             {
-                var value = sp.GetValue(modelInstance);
-                tp.SetValue(entityInstance, value);
+                var value = sp.GetValue(entityInstance);
+                tp.SetValue(modelInstance, value);
             }
         }
 
-        return entityInstance;
+        return modelInstance;
     }
 }

@@ -1,6 +1,5 @@
-﻿using Bistre.Entities;
+﻿using Bistre.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Bistre.Data.Contexts;
 

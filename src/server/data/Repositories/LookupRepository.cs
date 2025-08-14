@@ -1,7 +1,7 @@
 ﻿using Bistre.Data.Contexts;
 using Bistre.Data.Contracts.Base;
 using Bistre.Data.Repositories.Base;
-using Bistre.Entities;
+using Bistre.Data.Entities;
 
 namespace Bistre.Data.Repositories;
 

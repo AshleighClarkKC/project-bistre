@@ -4,7 +4,7 @@ using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
 using Bistre.Data.Contracts.Base;
-using Bistre.Entities;
+using Bistre.Data.Entities;
 
 namespace Bistre.Data.Handlers.Commands;
 

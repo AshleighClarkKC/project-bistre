@@ -4,7 +4,7 @@ using Bistre.Data.Models;
 using Bistre.Data.Models.Queries;
 using Bistre.Data.Models.Results.Base;
 using Bistre.Data.Repositories;
-using Bistre.Entities;
+using Bistre.Data.Entities;
 using LiteBus.Queries.Abstractions;
 using System.Net;
 
@@ -31,7 +31,7 @@ public class ListLookupQueryHandler(IBaseRepository<LookupEntity> repository) : 
             {
                 foreach (var item in data)
                 {
-                    var model = item.ToModel<LookupEntity, LookupModel>();
+                    var model = item.ToModel<LookupModel>();
                     lookups.Add(model);
                 }
             }

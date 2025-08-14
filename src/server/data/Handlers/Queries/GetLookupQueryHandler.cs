@@ -1,7 +1,5 @@
-﻿using Bistre.Data.Repositories;
-using Bistre.Entities;
+﻿using Bistre.Data.Entities;
 using Bistre.Data.Models;
-using Bistre.Data.Extensions;
 using Bistre.Data.Models.Queries;
 using Bistre.Data.Models.Results.Base;
 using LiteBus.Queries.Abstractions;
@@ -25,7 +23,7 @@ public class GetLookupQueryHandler(IBaseRepository<LookupEntity> repository) : I
             result.Success = data != null;
             result.Status = data != null ? (int)HttpStatusCode.OK : (int)HttpStatusCode.NotFound;
 
-            result.Data = data?.ToModel<LookupEntity, LookupModel>() ?? null;
+            result.Data = data?.ToModel<LookupModel>() ?? null;
         }
         catch (Exception ex) 
         {

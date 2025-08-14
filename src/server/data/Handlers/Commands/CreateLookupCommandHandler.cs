@@ -1,7 +1,5 @@
-﻿using Bistre.Data.Repositories;
-using Bistre.Entities;
+﻿using Bistre.Data.Entities;
 using Bistre.Data.Models.Commands;
-using Bistre.Data.Extensions;
 using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
@@ -19,7 +17,7 @@ public class CreateLookupCommandHandler(IBaseRepository<LookupEntity> repository
 
         try
         {
-            var entity = message.ToEntity<CreateLookupCommandModel, LookupEntity>();
+            var entity = message.ToEntity<LookupEntity>();
             await _repository.InsertAsync(entity, message.CreatedBy);
 
             result.Success = true;
