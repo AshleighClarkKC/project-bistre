@@ -7,4 +7,5 @@ public class DefaultContext(DbContextOptions<DefaultContext> options) : DbContex
 {
     public DbSet<LookupEntity> Lookups { get; set; }
 
+    public DbSet<ItemMasterSummaryEntity> ItemMasterSummaries { get; set; }
 }
