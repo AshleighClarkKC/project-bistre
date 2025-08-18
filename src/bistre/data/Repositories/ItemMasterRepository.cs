@@ -2,7 +2,6 @@
 using Bistre.Data.Contracts.Base;
 using Bistre.Data.Entities;
 using Bistre.Data.Repositories.Base;
-using System.Runtime.CompilerServices;
 
 namespace Bistre.Data.Repositories;
 
