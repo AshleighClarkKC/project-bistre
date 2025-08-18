@@ -1,0 +1,6 @@
+@Latte.API_HostAddress = http://localhost:5049
+
+GET {{Latte.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
