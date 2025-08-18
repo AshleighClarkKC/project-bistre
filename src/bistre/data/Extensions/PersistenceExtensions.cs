@@ -2,13 +2,13 @@
 using Bistre.Data.Contracts.Base;
 using Bistre.Data.Repositories;
 using Bistre.Data.Entities;
-using Bistre.Data.Models.Commands;
-using Bistre.Data.Models.Queries;
 using LiteBus.Commands.Extensions.MicrosoftDependencyInjection;
 using LiteBus.Messaging.Extensions.MicrosoftDependencyInjection;
 using LiteBus.Queries.Extensions.MicrosoftDependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Bistre.Data.Models.Commands.Lookup;
+using Bistre.Data.Models.Queries.Lookup;
 
 namespace Bistre.Data.Extensions;
 

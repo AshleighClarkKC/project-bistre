@@ -1,9 +1,9 @@
 ﻿using Bistre.Data.Entities;
-using Bistre.Data.Models.Commands;
 using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using System.Net;
 using Bistre.Data.Contracts.Base;
+using Bistre.Data.Models.Commands.Lookup;
 
 namespace Bistre.Data.Handlers.Commands;
 

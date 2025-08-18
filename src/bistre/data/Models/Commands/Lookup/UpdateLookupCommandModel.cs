@@ -2,7 +2,7 @@
 using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 
-namespace Bistre.Data.Models.Commands;
+namespace Bistre.Data.Models.Commands.Lookup;
 
 public class UpdateLookupCommandModel : BaseModel, ICommand<BaseCommandResult>
 {

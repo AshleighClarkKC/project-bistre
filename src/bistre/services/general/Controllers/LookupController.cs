@@ -1,6 +1,6 @@
 ﻿using Bistre.Data.Models;
-using Bistre.Data.Models.Commands;
-using Bistre.Data.Models.Queries;
+using Bistre.Data.Models.Commands.Lookup;
+using Bistre.Data.Models.Queries.Lookup;
 using Bistre.Data.Models.Results.Base;
 using LiteBus.Commands.Abstractions;
 using LiteBus.Queries.Abstractions;

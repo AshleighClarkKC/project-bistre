@@ -1,12 +1,12 @@
 ﻿using Bistre.Data.Contracts.Base;
 using Bistre.Data.Extensions;
 using Bistre.Data.Models;
-using Bistre.Data.Models.Queries;
 using Bistre.Data.Models.Results.Base;
 using Bistre.Data.Repositories;
 using Bistre.Data.Entities;
 using LiteBus.Queries.Abstractions;
 using System.Net;
+using Bistre.Data.Models.Queries.Lookup;
 
 namespace Bistre.Data.Handlers.Queries;
 
