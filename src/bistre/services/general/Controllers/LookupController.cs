@@ -6,6 +6,7 @@ using LiteBus.Commands.Abstractions;
 using LiteBus.Queries.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 
 namespace Bistre.Services.General.Controllers
 {
@@ -24,46 +25,37 @@ namespace Bistre.Services.General.Controllers
 
             try
             {
-                await _commandMediator.SendAsync(model);
+                result = await _commandMediator.SendAsync(model);
             }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.Message);
             }
 
-            var status = result.Success
-                ? StatusCode(result.Status, null)
-                : StatusCode(result.Status, result.Message);
-
-            return status;
-
+            return StatusCode(result.Status, JsonSerializer.Serialize(result));
         }
 
         [HttpGet, Route("Get/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(StatusCodeResult)), ProducesErrorResponseType(typeof(StatusCodeResult))]
         public async Task<ActionResult> GetByIdAsync(int id)
         {
-            GetLookupQueryModel queryModel = new()
+            GetLookupQueryModel query = new()
             {
                 Id = id
             };
 
-            BaseQueryResult<LookupModel> queryResult = new();
+            BaseQueryResult<LookupModel> result = new();
 
             try
             {
-                queryResult = await _queryMediator.QueryAsync(queryModel);
+                result = await _queryMediator.QueryAsync(query);
             }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.Message);
             }
 
-            var status = queryResult.Success
-                ? StatusCode(queryResult.Status, queryResult.Data)
-                : StatusCode(queryResult.Status, queryResult.Message);
-
-            return status;
+            return StatusCode(result.Status, JsonSerializer.Serialize(result));
         }
 
 
@@ -71,49 +63,41 @@ namespace Bistre.Services.General.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(StatusCodeResult)), ProducesErrorResponseType(typeof(StatusCodeResult))]
         public async Task<ActionResult> ListAsync(int limit)
         {
-            ListLookupQueryModel queryModel = new()
+            ListLookupQueryModel query = new()
             {
                 Limit = limit
             };
 
-            BaseQueryResult<IReadOnlyList<LookupModel>> queryResult = new();
+            BaseQueryResult<IReadOnlyList<LookupModel>> result = new();
 
             try
             {
-                queryResult = await _queryMediator.QueryAsync(queryModel);
+                result = await _queryMediator.QueryAsync(query);
             }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.Message);
             }
 
-            var status = queryResult.Success
-                ? StatusCode(queryResult.Status, queryResult.Data)
-                : StatusCode(queryResult.Status, queryResult.Message);
-
-            return status;
+            return StatusCode(result.Status, JsonSerializer.Serialize(result));
         }
 
         [HttpPut, Route("Update")]
         [ProducesResponseType((int)HttpStatusCode.Accepted, Type = typeof(StatusCodeResult)), ProducesErrorResponseType(typeof(StatusCodeResult))]
         public async Task<ActionResult> UpdateAsync([FromBody] UpdateLookupCommandModel model)
         {
-            BaseCommandResult queryResult = new();
+            BaseCommandResult result = new();
 
             try
             {
-                queryResult = await _commandMediator.SendAsync(model);
+                result = await _commandMediator.SendAsync(model);
             }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.Message);
             }
 
-            var status = queryResult.Success
-                ? StatusCode(queryResult.Status, null)
-                : StatusCode(queryResult.Status, queryResult.Message);
-
-            return status;
+            return StatusCode(result.Status, JsonSerializer.Serialize(result));
         }
 
         [HttpDelete, Route("Delete/{id}")]
@@ -125,22 +109,18 @@ namespace Bistre.Services.General.Controllers
                 Id = id
             };
 
-            BaseCommandResult queryResult = new();
+            BaseCommandResult result = new();
 
             try
             {
-                queryResult = await _commandMediator.SendAsync(model);
+                result = await _commandMediator.SendAsync(model);
             }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex.Message);
             }
 
-            var status = queryResult.Success
-                ? StatusCode(queryResult.Status, null)
-                : StatusCode(queryResult.Status, queryResult.Message);
-
-            return status;
+            return StatusCode(result.Status, JsonSerializer.Serialize(result));
         }
 
     }

@@ -9,17 +9,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Bistre.Data.Models.Commands.Lookup;
 using Bistre.Data.Models.Queries.Lookup;
+using Bistre.Data.Models.Commands.ItemMasterSummary;
+using Bistre.Data.Models.Queries.ItemMasterSummary;
 
 namespace Bistre.Data.Extensions;
 
 public static class PersistenceExtensions
 {
-    public static IServiceCollection AddDefaultDataContext(this IServiceCollection svc, Action<DbContextOptionsBuilder>? options = null) 
+    public static IServiceCollection AddDefaultDataContext(this IServiceCollection svc, Action<DbContextOptionsBuilder>? options = null)
         => svc.AddDbContext<DefaultContext>(options);
 
     public static IServiceCollection AddLookupRepository(this IServiceCollection svc)
         => svc
             .AddScoped<IBaseRepository<LookupEntity>, LookupRepository>();
+
+    public static IServiceCollection AddItemMasterRepository(this IServiceCollection svc)
+        => svc
+            .AddScoped<IBaseRepository<ItemMasterSummaryEntity>, ItemMasterRepository>();
 
     public static IServiceCollection AddLookupMediator(this IServiceCollection svc)
         => svc.AddLiteBus(
@@ -30,5 +36,16 @@ public static class PersistenceExtensions
                 .AddCommandModule(mod => mod.RegisterFromAssembly(typeof(DeleteLookupCommandModel).Assembly))
                 .AddQueryModule(mod => mod.RegisterFromAssembly(typeof(GetLookupQueryModel).Assembly))
         );
+
+    public static IServiceCollection AddItemMasterMediator(this IServiceCollection svc)
+        => svc.AddLiteBus(
+            lb =>
+                lb
+                .AddCommandModule(mod => mod.RegisterFromAssembly(typeof(CreateItemMasterSummaryCommandModel).Assembly))
+                .AddCommandModule(mod => mod.RegisterFromAssembly(typeof(UpdateItemMasterSummaryCommandModel).Assembly))
+                .AddCommandModule(mod => mod.RegisterFromAssembly(typeof(DeleteItemMasterSummaryCommandModel).Assembly))
+                .AddQueryModule(mod => mod.RegisterFromAssembly(typeof(GetItemMasterSummaryQueryModel).Assembly))
+        );
+
 }
 

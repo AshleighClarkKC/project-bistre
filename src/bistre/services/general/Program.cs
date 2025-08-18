@@ -17,7 +17,9 @@ builder.Services.AddDbContext<DefaultContext>(o => o.UseSqlServer(builder.Config
 
 builder.Services
     .AddLookupMediator()
-    .AddLookupRepository();
+    .AddItemMasterMediator()
+    .AddLookupRepository()
+    .AddItemMasterRepository();
 
 // Building the WebApplication
 
