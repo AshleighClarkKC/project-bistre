@@ -6,7 +6,7 @@ using System.Net;
 using Bistre.Data.Contracts.Base;
 using Bistre.Data.Models.Queries.Lookup;
 
-namespace Bistre.Data.Handlers.Queries;
+namespace Bistre.Data.Handlers.Queries.Lookup;
 
 public class GetLookupQueryHandler(IBaseRepository<LookupEntity> repository) : IQueryHandler<GetLookupQueryModel, BaseQueryResult<LookupModel>>
 {

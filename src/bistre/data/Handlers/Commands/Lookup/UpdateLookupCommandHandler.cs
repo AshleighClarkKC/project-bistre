@@ -5,23 +5,24 @@ using System.Net;
 using Bistre.Data.Contracts.Base;
 using Bistre.Data.Models.Commands.Lookup;
 
-namespace Bistre.Data.Handlers.Commands;
+namespace Bistre.Data.Handlers.Commands.Lookup;
 
-public class CreateLookupCommandHandler(IBaseRepository<LookupEntity> repository) : ICommandHandler<CreateLookupCommandModel, BaseCommandResult>
+public class UpdateLookupCommandHandler(IBaseRepository<LookupEntity> repository) : ICommandHandler<UpdateLookupCommandModel, BaseCommandResult>
 {
     private readonly IBaseRepository<LookupEntity> _repository = repository;
 
-    public async Task<BaseCommandResult> HandleAsync(CreateLookupCommandModel message, CancellationToken cancellationToken = default)
+    public async Task<BaseCommandResult> HandleAsync(UpdateLookupCommandModel message, CancellationToken cancellationToken = default)
     {
         BaseCommandResult result = new ();
 
         try
         {
             var entity = message.ToEntity<LookupEntity>();
-            await _repository.InsertAsync(entity, message.CreatedBy);
+            await _repository.UpdateAsync(entity, message.CreatedBy);
 
             result.Success = true;
-            result.Status = (int)HttpStatusCode.Created;
+            result.Status = (int)HttpStatusCode.Accepted;
+
         }
         catch (Exception ex) 
         {
@@ -33,4 +34,3 @@ public class CreateLookupCommandHandler(IBaseRepository<LookupEntity> repository
         return result;
     }
 }
-

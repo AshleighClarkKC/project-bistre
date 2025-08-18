@@ -8,7 +8,7 @@ using LiteBus.Queries.Abstractions;
 using System.Net;
 using Bistre.Data.Models.Queries.Lookup;
 
-namespace Bistre.Data.Handlers.Queries;
+namespace Bistre.Data.Handlers.Queries.Lookup;
 
 public class ListLookupQueryHandler(IBaseRepository<LookupEntity> repository) : IQueryHandler<ListLookupQueryModel, BaseQueryResult<IReadOnlyList<LookupModel>>>
 {
