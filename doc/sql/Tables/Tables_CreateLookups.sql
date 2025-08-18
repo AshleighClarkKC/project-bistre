@@ -1,0 +1,14 @@
+CREATE TABLE Lookups(
+    [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
+    [Name] VARCHAR(20) NOT NULL,
+    [Description] VARCHAR(100) NOT NULL,
+    [LookupTypeId] INT NULL, 
+    [IsActive] BIT NOT NULL DEFAULT(1),
+    [IsDeleted] BIT NOT NULL DEFAULT(0),
+    [CreatedDate] DATETIME2 NOT NULL,
+    [CreatedBy] UNIQUEIDENTIFIER NOT NULL,
+    [ModifiedDate] DATETIME2 NULL,
+    [ModifiedBy] UNIQUEIDENTIFIER NULL,
+    [DeletedDate] DATETIME2 NULL,
+    [DeletedBy] UNIQUEIDENTIFIER NULL
+);
